@@ -22,4 +22,57 @@ def first_task():
     return int(most_common_binary, 2) * int(least_common_binary, 2)
 
 
+def second_task():
+    oxygen_numbers = array
+    co2_numbers = array
+
+    for index in range(0, len(array[0])):
+        if len(oxygen_numbers) == 1:
+            break
+        oxygen_numbers = find_common_index_in_row(oxygen_numbers, index)
+
+    for index in range(0, len(array[0])):
+        if len(co2_numbers) == 1:
+            break
+        co2_numbers = find_common_index_in_row(co2_numbers, index, True)
+
+    return int(oxygen_numbers[0], 2) * int(co2_numbers[0], 2)
+
+
+def find_common_index_in_row(values, row_index, is_min=False):
+    ones = sum([1 for word in values if int(word[row_index]) == 1])
+    zeroes = sum([1 for word in values if int(word[row_index]) == 0])
+    new_values = []
+
+    if is_min:
+        if ones < zeroes:
+            for value in values:
+                if value[row_index] == '1':
+                    new_values.append(value)
+        elif zeroes < ones:
+            for value in values:
+                if value[row_index] == '0':
+                    new_values.append(value)
+        else:
+            for value in values:
+                if value[row_index] == '0':
+                    new_values.append(value)
+    else:
+        if ones > zeroes:
+            for value in values:
+                if value[row_index] == '1':
+                    new_values.append(value)
+        elif zeroes > ones:
+            for value in values:
+                if value[row_index] == '0':
+                    new_values.append(value)
+        else:
+            for value in values:
+                if value[row_index] == '1':
+                    new_values.append(value)
+
+    return new_values
+
+
 print(first_task())
+print(second_task())
